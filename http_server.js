@@ -41,6 +41,7 @@ app.post('/test', function (req, res) {
 	console.log(req.body.username, req.body.password);
 	res.send('Ok');
 });
-app.listen(3000, function () {
-	console.log('Running on port 3000!');
-});
+const http = require('http');
+const port = process.env.PORT || 3000;
+const server = http.createServer(app);
+server.listen(port);
