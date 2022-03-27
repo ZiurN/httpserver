@@ -30,7 +30,9 @@ posts.push('hello world')
 // Write db.data content to db.json
 await db.write();
 
-
+app.get('/', function (req, res) {
+	res.send('Hello World');
+});
 app.get('/data', function (req, res) {
 	console.log(db.data.users);
 	res.send(db.data.users);
