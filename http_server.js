@@ -7,6 +7,7 @@ app.use(bodyParser.json());
 import { join, dirname } from 'path'
 import { Low, JSONFile } from 'lowdb'
 import { fileURLToPath } from 'url'
+import http from 'http';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 app.use(express.static('public'));
@@ -18,18 +19,7 @@ const db = new Low(adapter);
 await db.read();
 
 db.data ||= { users: [] }
-
-/*
-db.data.posts.push('hello world')
-db.data.posts[0]
-
-
-const { posts } = db.data
-posts.push('hello world')
-*/
-// Write db.data content to db.json
 await db.write();
-
 app.get('/', function (req, res) {
 	res.send('Hello World');
 });
@@ -41,7 +31,7 @@ app.post('/test', function (req, res) {
 	console.log(req.body.username, req.body.password);
 	res.send('Ok');
 });
-const http = require('http');
+
 const port = process.env.PORT || 3000;
 const server = http.createServer(app);
 server.listen(port);
